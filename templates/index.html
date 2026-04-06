@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sasa Lino | Store</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #fff5f8; font-family: 'Poppins', sans-serif; }
+        .header { background: white; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 30px; }
+        .logo-img { max-width: 280px; height: auto; } 
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; padding: 0 20px; max-width: 1200px; margin: 0 auto; }
+        .card { border: none; border-radius: 15px; overflow: hidden; transition: 0.3s; background: white; height: 100%; }
+        .card img { height: 350px; width: 100%; object-fit: cover; cursor: pointer; }
+        .card-body { padding: 15px; text-align: center; display: flex; flex-direction: column; justify-content: space-between; }
+        .price { color: #d63384; font-weight: 600; font-size: 1.3rem; margin-bottom: 10px; }
+        .btn-whats { background-color: #25d366; color: white; border-radius: 50px; font-weight: bold; padding: 10px 20px; text-decoration: none; transition: 0.3s; display: inline-block; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Sasa Lino Logo" class="logo-img">
+    </div>
+
+    <div class="product-grid">
+        {% for p in produtos %}
+        {% set msg = "Olá Sasa! Gostei muito dessa peça: *" + p.nome + "* no valor de *R$ " + p.preco + "*. Segue o link da foto: " + request.host_url + "static/uploads/" + p.img %}
+        <div class="card shadow-sm">
+            <img src="{{ url_for('static', filename='uploads/' + p.img) }}" onclick="window.location.href='https://wa.me/16892336326?text={{ msg|urlencode }}'">
+            <div class="card-body">
+                <div>
+                    <h5 class="mb-1">{{ p.nome }}</h5>
+                    <p class="price">R$ {{ p.preco }}</p>
+                </div>
+                <a href="https://wa.me/16892336326?text={{ msg|urlencode }}" target="_blank" class="btn-whats">
+                    Encomendar agora
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <footer class="text-center py-5 text-muted" style="font-size: 0.8rem;">
+        &copy; 2026 Sasa Lino Store <br>
+        <small>Consagre ao Senhor tudo o que você faz.</small>
+    </footer>
+
+</body>
+</html>

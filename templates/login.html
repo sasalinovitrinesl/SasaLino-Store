@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Sasa Lino</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body style="background-color: #f8f9fa;">
+    <div class="container mt-5">
+        <div class="card mx-auto shadow" style="max-width: 400px; border-radius: 15px;">
+            <div class="card-body p-4 text-center">
+                <h3 style="color: #d63384;">Painel Sasa Lino</h3>
+                <p class="text-muted">Área Restrita</p>
+                <form method="POST">
+                    {% if erro %}<div class="alert alert-danger">{{ erro }}</div>{% endif %}
+                    <input type="password" name="senha_acesso" class="form-control mb-3" placeholder="Senha de Acesso" required autofocus>
+                    <button type="submit" class="btn btn-primary w-100" style="background-color: #d63384; border: none;">Entrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

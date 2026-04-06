@@ -1,0 +1,5 @@
+database.json
+config.json
+static/uploads/*
+__pycache__/
+*.pyc
