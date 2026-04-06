@@ -1,0 +1,59 @@
+annotated-types==0.7.0
+attrs==26.1.0
+Authlib==1.6.9
+blinker==1.9.0
+certifi==2026.2.25
+cffi==2.0.0
+charset-normalizer==3.4.6
+click==8.3.2
+contourpy==1.3.3
+cryptography @ file:///home/builder/.termux-build/python-cryptography/src
+cycler==0.12.1
+decorator==4.4.2
+Flask==3.1.3
+fonttools==4.62.1
+grpcio @ file:///home/builder/.termux-build/python-grpcio/src
+gunicorn==25.3.0
+idna==3.11
+ImageIO==2.37.3
+imageio-ffmpeg==0.6.0
+instagrapi==2.3.0
+isodate==0.7.2
+itsdangerous==2.2.0
+Jinja2==3.1.6
+kiwisolver==1.5.0
+lxml==6.0.2
+MarkupSafe==3.0.3
+matplotlib==3.10.8
+moviepy==1.0.3
+numpy @ file:///home/builder/.termux-build/python-numpy/src/dist/numpy-2.4.3-cp313-cp313-android_aarch64.whl#sha256=8ef35b7e7291aa8501ff0be8f354f3b089c4e0c08e9a905301b3551814601263
+onvif_zeep==0.2.12
+packaging==26.0
+pandas @ file:///home/builder/.termux-build/python-pandas/src/dist/pandas-3.0.2-cp313-cp313-android_aarch64.whl#sha256=1fceb33c6324048bc6ee6bee30928f882d664f2a80e0f0f984b541f38bfbbd27
+pillow @ file:///home/builder/.termux-build/python-pillow/src
+platformdirs==4.9.4
+proglog==0.1.12
+pycparser==3.0
+pycryptodome==3.23.0
+pycryptodomex==3.23.0
+pydantic==2.12.5
+pydantic_core==2.41.5
+PyJWT==2.12.1
+pyparsing==3.3.2
+PySocks==1.7.1
+python-dateutil==2.9.0.post0
+pytz==2026.1.post1
+requests==2.32.5
+requests-file==3.0.1
+requests-toolbelt==1.0.0
+scipy @ file:///home/builder/.termux-build/python-scipy/src/dist/scipy-1.17.1-cp313-cp313-android_aarch64.whl#sha256=983a3b6ea280209902b8cc8c5c47d881237522224142999ddf2c8e084ffb2db3
+setuptools==82.0.1
+six==1.17.0
+soupsieve==2.8.3
+tqdm==4.67.3
+typing-inspection==0.4.2
+typing_extensions==4.15.0
+urllib3==2.6.3
+Werkzeug==3.1.8
+wheel==0.46.3
+zeep==4.3.2
