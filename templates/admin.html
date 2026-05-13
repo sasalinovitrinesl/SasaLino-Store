@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin | Sasa Lino</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; font-family: 'Poppins', sans-serif; }
+        .admin-header { background: white; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; position: relative; }
+        .logo-admin { max-width: 150px; height: auto; }
+        .card { border: none; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .btn-primary { background-color: #d63384; border: none; }
+        .btn-primary:hover { background-color: #b52a6f; }
+        .product-img-preview { width: 50px; height: 50px; object-fit: cover; border-radius: 8px; }
+        .form-label { font-weight: 600; font-size: 0.9rem; color: #555; }
+        .logout-btn { position: absolute; right: 20px; top: 30px; }
+    </style>
+</head>
+<body>
+    <div class="admin-header">
+        <form method="POST" class="logout-btn">
+            <input type="hidden" name="logout" value="true">
+            <button type="submit" class="btn btn-outline-secondary btn-sm">Sair</button>
+        </form>
+        <img src="{{ url_for('static', filename='logo.png') }}" class="logo-admin">
+        <h5 class="mt-2 text-muted">Painel de Controle</h5>
+    </div>
+
+    <div class="container mt-2" style="max-width: 600px;">
+        <div class="row g-2 mb-2">
+            <div class="col-6">
+                <div class="card p-3 text-center">
+                    <small class="text-muted">Visitas</small>
+                    <h3 class="fw-bold m-0" style="color: #d63384;">{{ stats.visitas }}</h3>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card p-3 text-center">
+                    <small class="text-muted">Interesses</small>
+                    <h3 class="fw-bold m-0" style="color: #25d366;">{{ stats.cliques }}</h3>
+                </div>
+            </div>
+        </div>
+
+        <form method="POST" class="text-center mb-4">
+            <input type="hidden" name="zerar_stats" value="true">
+            <button type="submit" class="btn btn-sm text-muted" onclick="return confirm('Zerar contadores?')"><u>Zerar Contadores</u></button>
+        </form>
+
+        <div class="card p-4">
+            <h5 class="text-center mb-3">Redes Sociais</h5>
+            <form method="POST">
+                <input type="hidden" name="update_config" value="true">
+                <div class="mb-3">
+                    <label class="form-label">WhatsApp (Somente números)</label>
+                    <input type="text" name="whatsapp" class="form-control" value="{{ config.whatsapp }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Link Instagram</label>
+                    <input type="text" name="instagram" class="form-control" value="{{ config.instagram }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Link Facebook</label>
+                    <input type="text" name="facebook" class="form-control" value="{{ config.facebook }}">
+                </div>
+                <button type="submit" class="btn btn-dark w-100">Atualizar Links</button>
+            </form>
+        </div>
+
+        <div class="card p-4">
+            <h5 class="text-center mb-4">Novo Produto</h5>
+            <form method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label class="form-label">Nome do Produto</label>
+                    <input type="text" name="nome" class="form-control" required>
+                </div>
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <label class="form-label">Categoria</label>
+                        <select name="categoria" class="form-select">
+                            <option value="todos">Selecione...</option>
+                            <option value="lacos">Laços</option>
+                            <option value="cestas">Cestas personalizadas</option>
+                            <option value="bolsas">Bolsas</option>
+                            <option value="praia">Bolsas e chapéus de praia</option>
+                            <option value="joalheria">Joalheria</option>
+                            <option value="logo">Logo de empresa personalizado</option>
+                        </select>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <label class="form-label">TAG (Ex: Novidade)</label>
+                        <input type="text" name="tag" class="form-control" placeholder="Opcional">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Preço (US$)</label>
+                    <input type="text" name="preco" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Descrição</label>
+                    <textarea name="descricao" class="form-control" rows="2"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Fotos (Selecione várias)</label>
+                    <input type="file" name="fotos" class="form-control" multiple accept="image/*" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Vídeo (Opcional)</label>
+                    <input type="file" name="video" class="form-control" accept="video/*">
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Postar Produto</button>
+            </form>
+        </div>
+        <div class="card p-4 mb-5">
+            <h5 class="mb-3">Produtos Atuais</h5>
+            <div class="list-group">
+                {% for p in produtos %}
+                <div class="list-group-item d-flex justify-content-between align-items-center border-0 border-bottom px-0">
+                    <div class="d-flex align-items-center">
+                        {% if p.imgs and p.imgs|length > 0 %}
+                            <img src="{{ url_for('static', filename='uploads/' + p.imgs[0]) }}" class="product-img-preview">
+                        {% else %}
+                            <div class="product-img-preview bg-light d-flex align-items-center justify-content-center text-muted" style="font-size: 8px;">Sem foto</div>
+                        {% endif %}
+                        <div class="ms-2">
+                            <span class="d-block small fw-bold">{{ p.nome }}</span>
+                            <small class="text-muted">{{ p.categoria }} | {{ p.tag if p.tag else 'Sem tag' }}</small>
+                        </div>
+                    </div>
+                    <form method="POST">
+                        <input type="hidden" name="apagar_idx" value="{{ loop.index0 }}">
+                        <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Apagar este produto?')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+            <a href="/" class="btn btn-link text-muted btn-sm w-100 mt-3 text-decoration-none">Ver Loja</a>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
